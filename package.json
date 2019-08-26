@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "parcel source/index.html",
+    "prod": "parcel build source/index.html"
   },
   "repository": {
     "type": "git",
@@ -23,13 +24,18 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.5.5",
-    "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.7",
-    "webpack-dev-server": "^3.8.0"
+    "parcel-bundler": "^1.12.3",
+    "parcel-plugin-static-files-copy": "^2.2.1",
+    "three": "^0.107.0"
   },
   "dependencies": {
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "style-loader": "^1.0.0"
-  }
+  } ,
+  "staticFiles": {
+    "staticPath":  ["static"],
+    "watcherGlob": "**"
+}
+
 }
