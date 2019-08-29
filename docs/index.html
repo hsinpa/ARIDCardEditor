@@ -103,7 +103,7 @@
 		changeMatrixMode: 'cameraTransformMatrix',
 		smooth: true,
 		// number of matrices to smooth tracking over, more = smoother but slower follow
-		smoothCount: 8,
+		smoothCount: 15,
 		// distance tolerance for smoothing, if smoothThreshold # of matrices are under tolerance, tracking will stay still
 		smoothTolerance: 0.005,
 		// threshold for smoothing, will keep still unless enough matrices are over tolerance
@@ -141,8 +141,8 @@
 
     GLTFloader.load( './models/cat_and_rack/scene.gltf', function ( gltf ) {
     
-		gltf.scene.position.set(0,0,0);
-		gltf.scene.scale.set(0.7, 0.7, 0.7);
+		gltf.scene.position.set(0,-0.1,0);
+		gltf.scene.scale.set(0.5, 0.5, 0.5);
 
 		scene.add( gltf.scene );
 
