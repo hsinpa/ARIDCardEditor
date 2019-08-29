@@ -125,15 +125,16 @@
 	// onRenderFcts.push(function(delta){
 	// 	mesh.rotation.x += Math.PI*delta
 	// })
+
+	let light = new THREE.PointLight(0xFFFFFF, 1, 500)
+    light.position.set(10, 0, 25);
+    scene.add(light);
+
     var GLTFloader = new THREE.GLTFLoader();
-	var material	= new THREE.MeshNormalMaterial();
 
     GLTFloader.load( './models/cat_and_rack/scene.gltf', function ( gltf ) {
     
 		gltf.scene.position.set(0,0,0);
-		gltf.geometry.computeFaceNormals() 
-
-		//gltf.material = material;
 
 		scene.add( gltf.scene );
 
