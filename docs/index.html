@@ -137,6 +137,24 @@
     light.position.set(20, 50, 25);
     scene.add(light);
 
+    var fontLoader = new THREE.FontLoader();
+    
+    fontLoader.load( './fonts/helvetiker_regular.typeface.json', function ( font ) {
+    
+        var geometry = new THREE.TextGeometry( 'Hello World!', {
+            font: font,
+            size: 1,
+            height: 0.1
+        } );
+        
+        var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        var text = new THREE.Mesh( geometry, material );
+        text.position.set(2, 4, 0);
+    
+        scene.add( text );
+    
+    } );
+
     var GLTFloader = new THREE.GLTFLoader();
 
     GLTFloader.load( './models/cat_and_rack/scene.gltf', function ( gltf ) {

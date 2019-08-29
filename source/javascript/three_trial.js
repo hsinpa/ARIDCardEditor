@@ -51,8 +51,8 @@ export function ExeThreeTrial() {
     
         var geometry = new THREE.TextGeometry( 'Hello three.js!', {
             font: font,
-            size: 3,
-            height: 1
+            size: 1,
+            height: 0.1
         } );
         
         var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
