@@ -51,13 +51,13 @@ export function ExeThreeTrial() {
     
         var geometry = new THREE.TextGeometry( 'Hello three.js!', {
             font: font,
-            size: 1,
-            height: 0.1
+            size: 0.1,
+            height: 0.01
         } );
         
         var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
         var text = new THREE.Mesh( geometry, material );
-        text.position.set(-5, 0, -5);
+        text.position.set(-0.5,1 , 0);
     
         scene.add( text );
     
