@@ -2,7 +2,6 @@ import * as THREE from 'three';
 
 global.THREE = THREE
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { FontLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 module.export = function() {
 
