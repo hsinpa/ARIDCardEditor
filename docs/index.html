@@ -130,8 +130,11 @@
 
     GLTFloader.load( './models/cat_and_rack/scene.gltf', function ( gltf ) {
     
-		gltf.scene.position.set(0,0.5,0);
-		gltf.material = material;
+		gltf.scene.position.set(0,0,0);
+		gltf.geometry.computeFaceNormals() 
+
+		//gltf.material = material;
+
 		scene.add( gltf.scene );
 
 	}, undefined, function ( error ) {
