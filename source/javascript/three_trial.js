@@ -3,7 +3,7 @@ import * as THREE from 'three';
 global.THREE = THREE
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-module.export = function() {
+export function ExeThreeTrial() {
 
     const scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -27,8 +27,8 @@ module.export = function() {
     
     camera.position.z = 5;
     
-    let light = new THREE.PointLight(0xFFFFFF, 1, 500)
-    light.position.set(10, 0, 25);
+    let light = new THREE.PointLight(0xFFFFFF, 3, 500)
+    light.position.set(20, 50, 25);
     scene.add(light);
     
     

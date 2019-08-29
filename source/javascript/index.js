@@ -1,6 +1,6 @@
 import '../styles/main.css';
 
-import ARJS from './arjs_trial';
-//import THREETRIAL from './three_trial';
+//import ARJS from './arjs_trial';
+import {ExeThreeTrial} from './three_trial';
 
-ARJS();
+ExeThreeTrial();
