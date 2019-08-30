@@ -19,8 +19,8 @@ export function ExeThreeTrial() {
     renderer.setSize( window.innerWidth, window.innerHeight );
     document.body.appendChild( renderer.domElement );
         
-    console.log(THREEx);
-	var mixerContext= new THREEx.HtmlMixer.Context(renderer, scene, camera)
+    //console.log(THREEx);
+	//var mixerContext= new THREEx.HtmlMixer.Context(renderer, scene, camera)
 
     window.addEventListener('resize', () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -43,6 +43,30 @@ export function ExeThreeTrial() {
     light.position.set(20, 50, 25);
     scene.add(light);
     
+    
+    var video = document.createElement( 'video' );
+    video.crossOrigin = "anonymous";
+    video.src = "https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id=1elNOA4v92ewAmfPFh_2nMqlwnhw8_1eW";
+    video.width = 360;
+    video.height = 240;
+
+    video.load(); // must call after setting/changing source
+    video.play();
+    
+    var videoTexture = new THREE.VideoTexture( video );
+    videoTexture.minFilter = THREE.LinearFilter;
+    videoTexture.magFilter = THREE.LinearFilter;
+    videoTexture.format = THREE.RGBFormat;
+    
+    let videoMaterial = new THREE.MeshBasicMaterial({
+        map: videoTexture,
+    });
+
+    var geometry = new THREE.PlaneGeometry( 5, 5, 8,8 );
+    var material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+    var plane = new THREE.Mesh( geometry, videoMaterial );
+    plane.position.set(0,0,-5);
+    scene.add( plane );
     
     loader.load( '../models/cat_and_rack/scene.gltf', function ( gltf ) {
     
