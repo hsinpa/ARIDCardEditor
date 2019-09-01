@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Zip file testing</title>
+</head>
+<body>
+		<div id="container"></div>
+		<div id="blocker"></div>
+
+    <script src="./library/zip_library/zip.js"></script>
+
+    <script src="./library/zip_library/zip-ext.js"></script>
+
+    <script>
+        zip.workerScriptsPath = './library/zip_library/';
+
+        // use a BlobReader to read the zip from a Blob object
+        zip.createReader(new zip.HttpReader("https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id=1tpwZ8DCnr40GYVA3V2SFHBSxqEX21qJF"), function(reader) {
+
+        // get all entries from the zip
+        reader.getEntries(function(entries) {
+            console.log(entries.length);
+
+            if (entries.length) {
+                for (let i = 0; i < entries.length; i++) {
+                    console.log(entries[i].filename);
+
+                }
+                // // get first entry content as text
+                // entries[0].getData(new zip.TextWriter(), function(text) {
+                // // text contains the entry data as a String
+                // console.log(text);
+
+                // // close the zip reader
+                // reader.close(function() {
+                //     // onclose callback
+                // });
+
+                // }, function(current, total) {
+                // // onprogress callback
+                // });
+            }
+        });
+        }, function(error) {
+        // onerror callback
+        });
+    </script>
+</body>
+</html>

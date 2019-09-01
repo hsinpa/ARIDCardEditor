@@ -125,11 +125,8 @@ THREE.EditorControls = function ( object, domElement ) {
 
 		if ( scope.enabled === false ) return;
 
-		console.log("event.button " + event.button);
 		if ( event.button === 0 ) {
-
 			state = STATE.PAN;
-
 		} else if ( event.button === 1 ) {
 			//state = STATE.PAN;
 			state = STATE.ROTATE;

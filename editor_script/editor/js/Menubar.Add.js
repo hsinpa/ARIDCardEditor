@@ -417,39 +417,144 @@ Menubar.Add = function ( editor ) {
 	} );
 	options.add( option );
 
-	//
+	//Text
 
 	options.add( new UI.HorizontalRule() );
 
-	// OrthographicCamera
 
 	var option = new UI.Row();
 	option.setClass( 'option' );
-	option.setTextContent( strings.getKey( 'menubar/add/orthographiccamera' ) );
+	option.setTextContent('TEXT');
 	option.onClick( function () {
 
-		var camera = new THREE.OrthographicCamera();
-		camera.name = 'OrthographicCamera';
+		var fontLoader = new THREE.FontLoader();
 
-		editor.execute( new AddObjectCommand( editor, camera ) );
+		fontLoader.load( './fonts/helvetiker_regular.typeface.json', function ( font ) {
+    
+			var geometry = new THREE.TextGeometry( 'Hello three', {
+				font: font,
+				size: 0.1,
+				height: 0.01
+			} );
+	
+			// var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			var text = new THREE.Mesh( geometry, new THREE.MeshStandardMaterial()  );
+			text.position.set(-0.5,1 , 0);
+			text.name = 'Text';
+
+			editor.execute( new AddObjectCommand( editor, text ) );
+		} );
 
 	} );
 	options.add( option );
 
-	// PerspectiveCamera
+
+	//Image 
+	var fileInput = document.createElement('input');
+	var clickEvent = "";
+	fileInput.type = 'file';
+	
+	fileInput.onchange = e => { 
+		switch (clickEvent) {
+			case "imageLoader" :
+				OnImageLoader(e);
+				break;
+			case "fbxLoader":
+				OnFBXLoader(e);
+				break;
+
+		}
+	}
 
 	var option = new UI.Row();
 	option.setClass( 'option' );
-	option.setTextContent( strings.getKey( 'menubar/add/perspectivecamera' ) );
+	option.setTextContent('Image');
 	option.onClick( function () {
-
-		var camera = new THREE.PerspectiveCamera();
-		camera.name = 'PerspectiveCamera';
-
-		editor.execute( new AddObjectCommand( editor, camera ) );
+		fileInput.click();
+		clickEvent = "imageLoader";
 
 	} );
 	options.add( option );
+
+	var OnImageLoader = function(e) {
+		var reader = new FileReader();
+		reader.onload = function() {
+			var texture = new THREE.TextureLoader().load( reader.result );
+			var material = new THREE.MeshBasicMaterial( { map: texture } );
+			var geometry = new THREE.PlaneGeometry( 2, 2, 4 );
+			var plane = new THREE.Mesh( geometry, material );
+			plane.name = "Image";
+			editor.execute( new AddObjectCommand( editor, plane ) );
+		}
+		reader.readAsDataURL(e.target.files[0]);
+	};
+
+
+	// FBX Loader
+
+	var option = new UI.Row();
+
+	var OnFBXLoader = function(e) {
+		var reader = new FileReader();
+		reader.onload = function() {
+
+			var fgxLoader = new THREE.FBXLoader();
+			fgxLoader.load( reader.result, function ( object ) {
+				object.traverse( function ( child ) {
+
+					if ( child.isMesh ) {
+
+						child.castShadow = true;
+						child.receiveShadow = true;
+					}
+
+				} );
+				editor.execute( new AddObjectCommand( editor, object ) );
+			} );
+		};
+		reader.readAsDataURL(e.target.files[0]);
+	};
+
+	option.setClass( 'option' );
+	option.setTextContent('Import FBX Model');
+	option.onClick( function () {
+		fileInput.click();
+		clickEvent = "fbxLoader";
+	} );
+	options.add( option );
+
+
+
+	
+	// // OrthographicCamera
+
+	// var option = new UI.Row();
+	// option.setClass( 'option' );
+	// option.setTextContent( strings.getKey( 'menubar/add/orthographiccamera' ) );
+	// option.onClick( function () {
+
+	// 	var camera = new THREE.OrthographicCamera();
+	// 	camera.name = 'OrthographicCamera';
+
+	// 	editor.execute( new AddObjectCommand( editor, camera ) );
+
+	// } );
+	// options.add( option );
+
+	// // PerspectiveCamera
+
+	// var option = new UI.Row();
+	// option.setClass( 'option' );
+	// option.setTextContent( strings.getKey( 'menubar/add/perspectivecamera' ) );
+	// option.onClick( function () {
+
+	// 	var camera = new THREE.PerspectiveCamera();
+	// 	camera.name = 'PerspectiveCamera';
+
+	// 	editor.execute( new AddObjectCommand( editor, camera ) );
+
+	// } );
+	// options.add( option );
 
 	return container;
 

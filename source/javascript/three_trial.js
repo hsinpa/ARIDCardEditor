@@ -51,7 +51,10 @@ export function ExeThreeTrial() {
     video.height = 240;
 
     video.load(); // must call after setting/changing source
-    video.play();
+    //video.play();
+    video.onloadstart = function() {
+        video.play();
+    };
     
     var videoTexture = new THREE.VideoTexture( video );
     videoTexture.minFilter = THREE.LinearFilter;
@@ -68,7 +71,7 @@ export function ExeThreeTrial() {
     plane.position.set(0,0,-5);
     scene.add( plane );
     
-    loader.load( '../models/cat_and_rack/scene.gltf', function ( gltf ) {
+    loader.load( 'https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id=1nPySChaSp7nLSRgoT4WdVi8Ftu4K4ypK', function ( gltf ) {
     
         gltf.scene.position.set(0,-5,-5);
     

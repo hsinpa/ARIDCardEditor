@@ -98,6 +98,21 @@ Sidebar.Object = function ( editor ) {
 
 	container.add( objectNameRow );
 
+	//For text only
+	var objectTextRow = new UI.Row();
+	var objectText = new UI.Input().setWidth( '100px' ).setFontSize( '12px' ).onChange( function () {
+		console.log(editor.selected);
+
+		// editor.execute( new SetValueCommand( editor, editor.selected, 'name', objectName.getValue() ) );
+
+	} );
+
+	objectTextRow.add( new UI.Text( 'Text' ) ).setWidth( '90px' );
+	objectTextRow.add( objectText );
+
+	container.add( objectTextRow );
+
+
 	// position
 
 	var objectPositionRow = new UI.Row();

@@ -39030,6 +39030,17 @@
 
 							break;
 
+						case "TextGeometry":
+							var fontLoader = new THREE.FontLoader();
+							var font = fontLoader.parse( data.parameters.font.data);
+
+							geometry = new THREE.TextGeometry( data.text, {
+								font: font,
+								size: data.parameters.size,
+								height: data.parameters.height
+							} );
+						break;
+
 						default:
 
 							console.warn( 'THREE.ObjectLoader: Unsupported geometry type "' + data.type + '"' );
