@@ -23,8 +23,8 @@ var APP = {
 		this.load = function ( json ) {
 
 			this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
-			//this.renderer.gammaOutput = true;
-			//this.renderer.setClearColor( 0x000000 );
+			this.renderer.gammaOutput = true;
+			this.renderer.setClearColor( 0x000000,0 );
 			this.renderer.setPixelRatio( window.devicePixelRatio );
 
 			var project = json.project;
@@ -193,7 +193,7 @@ var APP = {
 
 			dispatch( events.start, arguments );
 
-			//this.renderer.setAnimationLoop( animate );
+			this.renderer.setAnimationLoop( animate );
 
 		};
 
@@ -210,7 +210,7 @@ var APP = {
 
 			dispatch( events.stop, arguments );
 
-			//this.renderer.setAnimationLoop( null );
+			this.renderer.setAnimationLoop( null );
 
 		};
 

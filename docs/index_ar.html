@@ -51,13 +51,12 @@
 		// 	antialias: true,
 		// 	alpha: true
 		// });
-		player.setSize( window.innerWidth, window.innerHeight );
 
-		renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+		//renderer.setClearColor(new THREE.Color('lightgrey'), 0)
 		// renderer.setSize( 640, 480 );
-		renderer.domElement.style.position = 'absolute'
-		renderer.domElement.style.top = '0px'
-		renderer.domElement.style.left = '0px'
+		// renderer.domElement.style.position = 'absolute'
+		// renderer.domElement.style.top = '0px'
+		// renderer.domElement.style.left = '0px'
 		//document.body.appendChild( renderer.domElement );
 		// array of functions for the rendering loop
 		var onRenderFcts= [];
@@ -68,7 +67,7 @@
 		//////////////////////////////////////////////////////////////////////////////////
 		// Create a camera
 		// var camera = new THREE.Camera();
-		//scene.add(camera);
+		scene.add(camera);
 		////////////////////////////////////////////////////////////////////////////////
 		//          handle arToolkitSource
 		////////////////////////////////////////////////////////////////////////////////
@@ -144,9 +143,9 @@
 		//		render the whole thing on the page
 		//////////////////////////////////////////////////////////////////////////////////
 		// render the scene
-		onRenderFcts.push(function() {
-			renderer.render( scene, camera );
-		})
+		// onRenderFcts.push(function() {
+		// 	renderer.render( scene, camera );
+		// })
 		// run the rendering loop
 		var lastTimeMsec= null
 		requestAnimationFrame(function animate(nowMsec){
