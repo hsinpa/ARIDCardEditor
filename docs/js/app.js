@@ -24,15 +24,15 @@ var APP = {
 
 			this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
 			//this.renderer.gammaOutput = true;
-			this.renderer.setClearColor( 0x000000 );
-			this.renderer.setPixelRatio( window.devicePixelRatio );
+			//this.renderer.setClearColor( 0x000000 );
+			//this.renderer.setPixelRatio( window.devicePixelRatio );
 
 			var project = json.project;
 
 			if ( project.shadows ) this.renderer.shadowMap.enabled = true;
 			if ( project.vr ) this.renderer.vr.enabled = true;
 
-			dom.appendChild( this.renderer.domElement );
+			//dom.appendChild( this.renderer.domElement );
 
 			this.setScene( loader.parse( json.scene ) );
 			this.setCamera( loader.parse( json.camera ) );
@@ -193,7 +193,7 @@ var APP = {
 
 			dispatch( events.start, arguments );
 
-			this.renderer.setAnimationLoop( animate );
+			//this.renderer.setAnimationLoop( animate );
 
 		};
 
@@ -210,7 +210,7 @@ var APP = {
 
 			dispatch( events.stop, arguments );
 
-			this.renderer.setAnimationLoop( null );
+			//this.renderer.setAnimationLoop( null );
 
 		};
 
