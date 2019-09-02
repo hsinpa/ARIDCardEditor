@@ -22,7 +22,7 @@ var APP = {
 
 		this.load = function ( json ) {
 
-			this.renderer = new THREE.WebGLRenderer( { antialias: true } );
+			this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
 			this.renderer.gammaOutput = true;
 			this.renderer.setClearColor( 0x000000 );
 			this.renderer.setPixelRatio( window.devicePixelRatio );
