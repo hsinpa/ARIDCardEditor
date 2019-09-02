@@ -32,7 +32,7 @@ var APP = {
 			if ( project.shadows ) this.renderer.shadowMap.enabled = true;
 			if ( project.vr ) this.renderer.vr.enabled = true;
 
-			//dom.appendChild( this.renderer.domElement );
+			dom.appendChild( this.renderer.domElement );
 
 			this.setScene( loader.parse( json.scene ) );
 			this.setCamera( loader.parse( json.camera ) );
