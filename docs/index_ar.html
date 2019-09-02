@@ -51,6 +51,8 @@
 		// 	antialias: true,
 		// 	alpha: true
 		// });
+		player.setSize( window.innerWidth, window.innerHeight );
+
 		renderer.setClearColor(new THREE.Color('lightgrey'), 0)
 		// renderer.setSize( 640, 480 );
 		renderer.domElement.style.position = 'absolute'
@@ -66,7 +68,7 @@
 		//////////////////////////////////////////////////////////////////////////////////
 		// Create a camera
 		// var camera = new THREE.Camera();
-		scene.add(camera);
+		//scene.add(camera);
 		////////////////////////////////////////////////////////////////////////////////
 		//          handle arToolkitSource
 		////////////////////////////////////////////////////////////////////////////////
