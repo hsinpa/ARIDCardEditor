@@ -1,0 +1,27 @@
+{
+  "name": "Universal_Real_Time_Server",
+  "version": "1.0.0",
+  "description": "Server for vr device connection",
+  "private": true,
+  "main": "start.js",
+  "scripts": {
+    "start": "nodemon --use_strict start.js"
+  },
+  "author": "Hsinpa <hsinpa@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "*",
+    "csv-parse": "*",
+    "fs-path": "*",
+    "googleapis": "^39.2.0",
+    "handlebars": "*",
+    "koa": "^2.8.1",
+    "koa-bodyparser": "*",
+    "koa-router": "*",
+    "koa-views": "*",
+    "mkdirp": "*",
+    "request": "*",
+    "socket.io": "*",
+    "underscore": "*"
+  }
+}

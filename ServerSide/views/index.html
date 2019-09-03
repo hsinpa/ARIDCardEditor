@@ -1,0 +1,19 @@
+<html>
+<title>{{title}}</title>
+
+<body>
+<h1>HELLO WORLD</h1>
+
+
+</body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+  var socket = io.connect();
+
+  socket.on('OnConnect', function (data) {
+    console.log(data);
+  });
+
+</script>
+</html>
