@@ -4,11 +4,13 @@ const bodyParser = require('koa-bodyparser');
 const rootRouter = require('./routing');
 
 const Router = require('koa-router');
+const cors = require('koa-cors');
 const router = new Router();
 const views = require('koa-views');
 const env = process.env;
 
 const app = new Koa();
+app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
   map: {

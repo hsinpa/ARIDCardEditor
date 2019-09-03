@@ -314,11 +314,16 @@ Menubar.File = function ( editor ) {
 		delete output.history;
 
 		var vr = output.project.vr;
+		var outputString = JSON.stringify( output, parseNumber, '\t' );
+			outputString = outputString.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
 
-		output = JSON.stringify( output, parseNumber, '\t' );
-		output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
-
-		zip.file( 'app.json', output );
+		var uploadURL = "/google_drive_upload";
+		$.post( uploadURL, output)
+		.done(function( data ) {
+			console.log("push to server");
+		});
+	  
+		zip.file( 'app.json', outputString );
 
 		//
 

@@ -13,7 +13,7 @@ module.exports = class GoogleDriveUtil {
             if (err) return console.log('Error loading client secret file:', err);
             // Authorize a client with credentials, then call the Google Drive API.
             this.authorize(JSON.parse(content), (auth) => {
-                this.listFiles(auth);
+                //this.listFiles(auth);
             });
         });
     }
@@ -105,22 +105,14 @@ module.exports = class GoogleDriveUtil {
     /**
      * Upload file
      * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
-     * @param {string} path filePath
-     * @param {string} name file name
-     * @param {string} mimeType mimeType
+     * @param {object} fileMetadata file name
+     * @param {object} media mimeType
      * @param {string} folderId folder id
      */
-    uploadFile(auth, path, name, mimeType, folderId) {
+    uploadFile(auth, fileMetadata, media) {
         const drive = google.drive({version: 'v3', auth});
         const self = this;
-        var fileMetadata = {
-            'name': name,
-            parents: [ folderId ]
-          };
-          var media = {
-            mimeType: mimeType,
-            body: fs.createReadStream(path)
-          };
+
           drive.files.create({
             resource: fileMetadata,
             media: media,
@@ -131,7 +123,7 @@ module.exports = class GoogleDriveUtil {
               console.error(err);
             } else {
                 console.log("File ID " + file.data.id);
-                self.grantPermission(auth,file.data.id);
+                self.grantPermission(auth, file.data.id);
             }
           });
     }

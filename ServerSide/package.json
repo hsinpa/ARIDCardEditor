@@ -18,10 +18,14 @@
     "koa": "^2.8.1",
     "koa-bodyparser": "*",
     "koa-router": "*",
+    "koa-static": "^5.0.0",
     "koa-views": "*",
     "mkdirp": "*",
     "request": "*",
     "socket.io": "*",
     "underscore": "*"
+  },
+  "devDependencies": {
+    "koa-cors": "0.0.16"
   }
 }
