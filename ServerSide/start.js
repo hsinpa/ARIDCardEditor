@@ -4,7 +4,6 @@ const bodyParser = require('koa-bodyparser');
 const rootRouter = require('./routing');
 
 const Router = require('koa-router');
-const cors = require('koa-cors');
 const router = new Router();
 const views = require('koa-views');
 const env = process.env;

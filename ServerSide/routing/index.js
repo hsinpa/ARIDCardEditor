@@ -1,9 +1,11 @@
 const GoogleDriveUtil = require('../features/GoogleDrive/google_drive_uti');
 const Readable = require('stream').Readable
+const Utility = require("../features/Utility");
+const fs = require('fs');
 
 module.exports =  (router) => {
   let googleDrive = new GoogleDriveUtil();
-
+  let utility = new Utility();
 
   router.get('/', async function (ctx, next) {
     ctx.state = {
@@ -34,8 +36,10 @@ module.exports =  (router) => {
       body: fs.createReadStream(path)
     };
 
-    googleDrive.makeCall(function(auth) {
-      googleDrive.uploadFile(auth, fileMetadata, media);
+    var auth = await googleDrive.makeCall();
+    var fileID = await googleDrive.uploadFile(auth, fileMetadata, media);
+    googleDrive.grantPermission(auth, fileID, function() {
+      console.log("Permission Get");
     });
 
     return "";
@@ -43,7 +47,11 @@ module.exports =  (router) => {
 
   router.post('/google_drive_upload', async function (ctx, next) {
     //console.log(ctx.request.body);
-    const filename = "test_dataset";
+
+    
+    var uuid = utility.GetUUID();
+
+    const filename = uuid;
     const mimeType = "application/json";
     const folder_id = "1FbWk3KGo2_BPcEV3EqdiV0jKct3ONnWy";
 
@@ -61,10 +69,12 @@ module.exports =  (router) => {
       body: s
     };
     
-    googleDrive.makeCall(function(auth) {
-      googleDrive.uploadFile(auth, fileMetadata, media);
+    var auth = await googleDrive.makeCall();
+    var fileID = await googleDrive.uploadFile(auth, fileMetadata, media);
+    googleDrive.grantPermission(auth, fileID, function() {
+      console.log("Permission Get");
     });
 
-    ctx.body = 'Redirecting to shopping cart';
+    ctx.body = fileID;
   });
 }

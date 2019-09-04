@@ -18,15 +18,27 @@ module.exports = class GoogleDriveUtil {
         });
     }
 
-    makeCall(callback) {
-        // Load client secrets from a local file.
-        fs.readFile('data/credentials.json', (err, content) => {
-            if (err) return console.log('Error loading client secret file:', err);
-            // Authorize a client with credentials, then call the Google Drive API.
-            this.authorize(JSON.parse(content), (auth) => {
-                callback(auth);
+    makeCall() {
+
+        const promise = new Promise((resolve, reject) => {
+            fs.readFile('data/credentials.json', (err, content) => {
+                if (err) return console.log('Error loading client secret file:', err);
+                this.authorize(JSON.parse(content), (auth) => {
+                    resolve (auth);
+                });
+    
             });
         });
+
+        return promise;
+        // Load client secrets from a local file.
+        // fs.readFile('data/credentials.json', (err, content) => {
+        //     if (err) return console.log('Error loading client secret file:', err);
+        //     // Authorize a client with credentials, then call the Google Drive API.
+        //     this.authorize(JSON.parse(content), (auth) => {
+        //         callback(auth);
+        //     });
+        // });
     }
     
     /**
@@ -109,30 +121,33 @@ module.exports = class GoogleDriveUtil {
      * @param {object} media mimeType
      * @param {string} folderId folder id
      */
-    uploadFile(auth, fileMetadata, media) {
+    uploadFile(auth, fileMetadata, media ) {
         const drive = google.drive({version: 'v3', auth});
-        const self = this;
-
-          drive.files.create({
-            resource: fileMetadata,
-            media: media,
-            fields: 'id'
-          }, function (err, file) {
-            if (err) {
-              // Handle error
-              console.error(err);
-            } else {
-                console.log("File ID " + file.data.id);
-                self.grantPermission(auth, file.data.id);
-            }
-          });
+        return new Promise((resolve, reject) => {
+        
+            drive.files.create({
+                resource: fileMetadata,
+                media: media,
+                fields: 'id'
+              }, function (err, file) {
+                if (err) {
+                  // Handle error
+                  console.error(err);
+                  reject(err);
+                } else {
+                    console.log("File ID " + file.data.id);
+    
+                    resolve(file.data.id);
+                }
+              });
+        });
     }
 
     /**
      * Grant File Permission
      * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
      * @param {string} file_id file id
-     * @param {function} permissionCallback The callback to call with the permission ID.
+     * @param {function} permissionCallback The callback.
      */
 
     grantPermission(auth, file_id, permissionCallback) {
@@ -154,7 +169,7 @@ module.exports = class GoogleDriveUtil {
               console.error(err);
               //permissionCallback(err);
             } else {
-                console.log("Set Permission");
+                if (permissionCallback != null) permissionCallback();
             }
           });
     }

@@ -161,3 +161,11 @@ textarea, input { outline: none; } /* osx */
 #outliner .Script:after {
 	content: '{...}' /* ❮/❯ */
 }
+
+#center_modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	visibility: hidden;  
+}

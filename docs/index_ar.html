@@ -21,9 +21,12 @@
 	<br/>
 	Contact me any time at <a href='https://twitter.com/jerome_etienne' target='_blank'>@jerome_etienne</a>
 </div><script>
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var fileID = url.searchParams.get("id");
 
 	var loader = new THREE.FileLoader();
-		loader.load( 'https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id=1fiYfCeYkBN1zk1XMqvkvRet-RcxClJSB', function ( text ) {
+		loader.load( 'https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id='+fileID, function ( text ) {
 
 			var player = new APP.Player();
 			player.load( JSON.parse( text ) );
@@ -59,10 +62,10 @@
 		renderer.domElement.style.left = '0px'
 		scene.background = null;
 
-		console.log(player);
-		console.log(renderer);
-		console.log(scene);
-		console.log(camera);
+		// console.log(player);
+		// console.log(renderer);
+		// console.log(scene);
+		// console.log(camera);
 
 		//document.body.appendChild( renderer.domElement );
 		// array of functions for the rendering loop

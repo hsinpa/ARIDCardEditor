@@ -297,12 +297,41 @@ Menubar.File = function ( editor ) {
 	//
 
 	options.add( new UI.HorizontalRule() );
-
-	// Publish
-
+	//Publish
 	var option = new UI.Row();
 	option.setClass( 'option' );
 	option.setTextContent( strings.getKey( 'menubar/file/publish' ) );
+	option.onClick( function () {
+		var output = editor.toJSON();
+		output.metadata.type = 'App';
+		delete output.history;
+		// console.log(document.querySelector("#center_modal .content"));
+		var centerModalDom = $("#center_modal");
+
+		var uploadURL = "/google_drive_upload";
+		$.post( uploadURL, output)
+		.done(function( data ) {
+			var ar_live_url = ("https://hsinpa.github.io/ARIDCardEditor/index_ar.html?id=" + data);
+			console.log(ar_live_url);
+
+			var qrcode = new QRCode(document.querySelector("#center_modal .content"), {
+				text: ar_live_url,
+				width: 256,
+				height: 256,
+				colorDark : "#000000",
+				colorLight : "#ffffff",
+				correctLevel : QRCode.CorrectLevel.H
+			});
+			centerModalDom.css("visibility", "visible");
+		});
+	});
+	options.add( option );
+
+	// Export
+
+	var option = new UI.Row();
+	option.setClass( 'option' );
+	option.setTextContent( 'Export' );
 	option.onClick( function () {
 
 		var zip = new JSZip();
@@ -314,16 +343,10 @@ Menubar.File = function ( editor ) {
 		delete output.history;
 
 		var vr = output.project.vr;
-		var outputString = JSON.stringify( output, parseNumber, '\t' );
-			outputString = outputString.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
+		var output = JSON.stringify( output, parseNumber, '\t' );
+		output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
 
-		var uploadURL = "/google_drive_upload";
-		$.post( uploadURL, output)
-		.done(function( data ) {
-			console.log("push to server");
-		});
-	  
-		zip.file( 'app.json', outputString );
+		zip.file( 'app.json', output );
 
 		//
 
