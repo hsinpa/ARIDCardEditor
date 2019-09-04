@@ -61,7 +61,7 @@ module.exports =  (router) => {
     };
 
     var s = new Readable
-    s.push(JSON.stringify(ctx.request.body))    // the string you want
+    s.push(ctx.request.rawBody)    // the string you want
     s.push(null)      // indicates end-of-file basically - the end of the stream
 
     var media = {

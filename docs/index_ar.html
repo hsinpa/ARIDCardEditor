@@ -27,10 +27,14 @@
 	console.log(fileID);
 	var loader = new THREE.FileLoader();
 	//1fiYfCeYkBN1zk1XMqvkvRet-RcxClJSB
-		loader.load( 'https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id=12QZ7jP9bsU5gZEXfAQQq8_IvG40SJcYh', function ( text ) {
-
+		loader.load( 'https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id=' + fileID, function ( text ) {
 			var player = new APP.Player();
-			player.load( JSON.parse( text ) );
+
+			//text = text.replace(/\\"/g, "|");
+
+			var jsonObject = (JSON.parse( text ));
+
+			player.load( jsonObject );
 			player.setSize( window.innerWidth, window.innerHeight );
 			player.play();
 
@@ -126,8 +130,10 @@
 			if( arToolkitSource.ready === false )	return
 			arToolkitContext.update( arToolkitSource.domElement )
 			// update scene.visible if the marker is seen
-			scene.visible = camera.visible
+			scene.visible = camera.visible;
+			//camera.visible
 		})
+
 		////////////////////////////////////////////////////////////////////////////////
 		//          Create a ArMarkerControls
 		////////////////////////////////////////////////////////////////////////////////
@@ -147,7 +153,7 @@
 			smoothThreshold: 2,
 		})
 		// as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
-		scene.visible = false
+		scene.visible = false;
 
 
 		//////////////////////////////////////////////////////////////////////////////////

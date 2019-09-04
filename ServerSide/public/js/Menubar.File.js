@@ -308,6 +308,7 @@ Menubar.File = function ( editor ) {
 		// console.log(document.querySelector("#center_modal .content"));
 		var centerModalDom = $("#center_modal");
 
+		output = JSON.stringify( output );
 		var uploadURL = "/google_drive_upload";
 		$.post( uploadURL, output)
 		.done(function( data ) {
@@ -343,8 +344,7 @@ Menubar.File = function ( editor ) {
 		delete output.history;
 
 		var vr = output.project.vr;
-		var output = JSON.stringify( output, parseNumber, '\t' );
-		output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
+		output = JSON.stringify( output );
 
 		zip.file( 'app.json', output );
 
