@@ -17,7 +17,13 @@ app.use(views(__dirname + '/views', {
   }
 }));
 
-app.use(bodyParser());
+app.use(bodyParser(
+  {
+    'formLimit':'5mb',
+    'jsonLimit':'5mb',
+    'textLimit':'5mb'
+  }
+));
 app.use(router.routes())
 app.use(router.allowedMethods())
 

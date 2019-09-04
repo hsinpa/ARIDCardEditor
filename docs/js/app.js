@@ -111,13 +111,6 @@ var APP = {
 			this.camera = value;
 			this.camera.aspect = this.width / this.height;
 			this.camera.updateProjectionMatrix();
-
-			if ( this.renderer.vr.enabled ) {
-
-				dom.appendChild( THREE.WEBVR.createButton( this.renderer ) );
-
-			}
-
 		};
 
 		this.setScene = function ( value ) {
