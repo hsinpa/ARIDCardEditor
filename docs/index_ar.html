@@ -26,7 +26,8 @@
 	var fileID = url.searchParams.get("id");
 
 	var loader = new THREE.FileLoader();
-		loader.load( 'https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id='+fileID, function ( text ) {
+	//1fiYfCeYkBN1zk1XMqvkvRet-RcxClJSB
+		loader.load( 'https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id=1fiYfCeYkBN1zk1XMqvkvRet-RcxClJSB', function ( text ) {
 
 			var player = new APP.Player();
 			player.load( JSON.parse( text ) );
