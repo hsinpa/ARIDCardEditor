@@ -5,12 +5,13 @@
   "private": true,
   "main": "start.js",
   "scripts": {
-    "start": "nodemon --use_strict start.js"
+    "start": "nodemon --use_strict start.js",
+    "production": "pm2 start start.js"
+
   },
   "author": "Hsinpa <hsinpa@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "crypto": "*",
     "csv-parse": "*",
     "fs-path": "*",
     "googleapis": "^39.2.0",
@@ -24,8 +25,5 @@
     "request": "*",
     "socket.io": "*",
     "underscore": "*"
-  },
-  "devDependencies": {
-    "koa-cors": "0.0.16"
   }
 }

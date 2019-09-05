@@ -301,6 +301,7 @@ Menubar.File = function ( editor ) {
 	var option = new UI.Row();
 	option.setClass( 'option' );
 	option.setTextContent( strings.getKey( 'menubar/file/publish' ) );
+
 	option.onClick( function () {
 		var output = editor.toJSON();
 		output.metadata.type = 'App';
@@ -314,6 +315,8 @@ Menubar.File = function ( editor ) {
 		.done(function( data ) {
 			var ar_live_url = ("https://hsinpa.github.io/ARIDCardEditor/index_ar.html?id=" + data);
 			console.log(ar_live_url);
+			//Clear whats inside
+			$("#center_modal .content").html("");
 
 			var qrcode = new QRCode(document.querySelector("#center_modal .content"), {
 				text: ar_live_url,
@@ -324,6 +327,22 @@ Menubar.File = function ( editor ) {
 				correctLevel : QRCode.CorrectLevel.H
 			});
 			centerModalDom.css("visibility", "visible");
+			console.log(qrcode);
+			$("#center_modal .content").find('img').on('load', function() {
+				var patternRatio = 0.8;
+				var imageSize = 256;
+				var borderColor = "black";
+				var imageSelf = this;
+				THREEx.ArPatternFile.buildFullMarker(imageSelf.src, patternRatio, imageSize, borderColor, function onComplete(markerUrl){	
+					$("#center_modal .content").html("");
+					var fullMarkerImage = document.createElement('img');					
+						fullMarkerImage.src = markerUrl;
+						
+					$("#center_modal .content").append(fullMarkerImage);
+				});
+		
+			});
+			
 		});
 	});
 	options.add( option );
