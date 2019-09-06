@@ -318,35 +318,46 @@ Menubar.File = function ( editor ) {
 			//Clear whats inside
 			$("#center_modal .content").html("");
 
-			var qrcode = new QRCode(document.querySelector("#center_modal .content"), {
-				text: ar_live_url,
-				width: 128,
-				height: 128,
-				colorDark : "#000000",
-				colorLight : "#ffffff",
-				correctLevel : QRCode.CorrectLevel.H
-			});
-			centerModalDom.css("visibility", "visible");
-			console.log(qrcode);
-			$("#center_modal .content").find('img').on('load', function() {
-				var patternRatio = 0.8;
-				var imageSize = 256;
-				var borderColor = "black";
-				var imageSelf = this;
-				THREEx.ArPatternFile.buildFullMarker(imageSelf.src, patternRatio, imageSize, borderColor, function onComplete(markerUrl){	
-					$("#center_modal .content").html("");
-					var fullMarkerImage = document.createElement('img');					
-						fullMarkerImage.src = markerUrl;
+			// var qrcode = new QRCode(document.querySelector("#center_modal .content"), {
+			// 	text: ar_live_url,
+			// 	width: 256,
+			// 	height: 256,
+			// 	colorDark : "#800d22",
+			// 	colorLight : "#ffffff",
+			// 	correctLevel : QRCode.CorrectLevel.H
+			// });
 
-						THREEx.ArPatternFile.encodeImageURL(imageSelf.src, function onComplete(patternFileString) {
-							$.post( '/gd_armarker_upload', {"_id" : file_id, "data" : patternFileString})
-							.done(function() {
-								$("#center_modal .content").append(fullMarkerImage);
-							});
-						});				
-				});
+			QrCodeWithLogo.toCanvas({
+				canvas: document.getElementById('qr_canvas'), // 换成你的canvas节点
+				content: ar_live_url,
+				width: 256,
+				logo: {
+				  src: './images/hiro_patt.jpg',
+				}
+			  })
+			
+
+			centerModalDom.css("visibility", "visible");
+
+			// $("#center_modal .content").find('img').on('load', function() {
+			// 	var patternRatio = 0.8;
+			// 	var imageSize = 256;
+			// 	var borderColor = "black";
+			// 	var imageSelf = this;
+			// 	// THREEx.ArPatternFile.buildFullMarker(imageSelf.src, patternRatio, imageSize, borderColor, function onComplete(markerUrl){	
+			// 	// 	$("#center_modal .content").html("");
+			// 	// 	var fullMarkerImage = document.createElement('img');					
+			// 	// 		fullMarkerImage.src = markerUrl;
+
+			// 	// 		THREEx.ArPatternFile.encodeImageURL(imageSelf.src, function onComplete(patternFileString) {
+			// 	// 			$.post( '/gd_armarker_upload', {"_id" : file_id, "data" : patternFileString})
+			// 	// 			.done(function() {
+			// 	// 				$("#center_modal .content").append(fullMarkerImage);
+			// 	// 			});
+			// 	// 		});				
+			// 	// });
 		
-			});
+			// });
 			
 		});
 	});
