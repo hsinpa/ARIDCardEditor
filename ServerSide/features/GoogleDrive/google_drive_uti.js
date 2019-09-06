@@ -1,6 +1,7 @@
 const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
+const Readable = require('stream').Readable
 
 module.exports = class GoogleDriveUtil {
     
@@ -172,6 +173,32 @@ module.exports = class GoogleDriveUtil {
                 if (permissionCallback != null) permissionCallback();
             }
           });
+    }
+
+    getFileMedaData(fileName, folderId) {
+        return {
+            'name': fileName,
+            parents: [ folderId ]
+        };
+    }
+
+    getMedia(mimeType, bodyContent) {
+        var s = new Readable
+        s.push(bodyContent)    // the string you want
+        s.push(null)      // indicates end-of-file basically - the end of the stream
+
+        return {
+            mimeType: mimeType,
+            body: s
+        };
+    }
+
+    async uploadAndGrandPermission(fileMetadata, media ) {        
+        var auth = await this.makeCall();
+        var fileID = await this.uploadFile(auth, fileMetadata, media);
+        this.grantPermission(auth, fileID);
+        
+        return fileID;
     }
 
 }

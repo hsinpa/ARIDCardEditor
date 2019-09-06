@@ -310,18 +310,18 @@ Menubar.File = function ( editor ) {
 		var centerModalDom = $("#center_modal");
 
 		output = JSON.stringify( output );
-		var uploadURL = "/google_drive_upload";
+		var uploadURL = "/gd_data_upload";
 		$.post( uploadURL, output)
-		.done(function( data ) {
-			var ar_live_url = ("https://hsinpa.github.io/ARIDCardEditor/index_ar.html?id=" + data);
+		.done(function( file_id ) {
+			var ar_live_url = ("https://hsinpa.github.io/ARIDCardEditor/index_ar.html?id=" + file_id);
 			console.log(ar_live_url);
 			//Clear whats inside
 			$("#center_modal .content").html("");
 
 			var qrcode = new QRCode(document.querySelector("#center_modal .content"), {
 				text: ar_live_url,
-				width: 256,
-				height: 256,
+				width: 128,
+				height: 128,
 				colorDark : "#000000",
 				colorLight : "#ffffff",
 				correctLevel : QRCode.CorrectLevel.H
@@ -337,8 +337,13 @@ Menubar.File = function ( editor ) {
 					$("#center_modal .content").html("");
 					var fullMarkerImage = document.createElement('img');					
 						fullMarkerImage.src = markerUrl;
-						
-					$("#center_modal .content").append(fullMarkerImage);
+
+						THREEx.ArPatternFile.encodeImageURL(imageSelf.src, function onComplete(patternFileString) {
+							$.post( '/gd_armarker_upload', {"_id" : file_id, "data" : patternFileString})
+							.done(function() {
+								$("#center_modal .content").append(fullMarkerImage);
+							});
+						});				
 				});
 		
 			});

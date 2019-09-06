@@ -7,11 +7,11 @@
   "scripts": {
     "start": "nodemon --use_strict start.js",
     "production": "pm2 start start.js"
-
   },
   "author": "Hsinpa <hsinpa@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@koa/cors": "^2.2.3",
     "csv-parse": "*",
     "fs-path": "*",
     "googleapis": "^39.2.0",
@@ -21,6 +21,7 @@
     "koa-router": "*",
     "koa-static": "^5.0.0",
     "koa-views": "*",
+    "kvdb.io": "^1.0.2",
     "mkdirp": "*",
     "request": "*",
     "socket.io": "*",
