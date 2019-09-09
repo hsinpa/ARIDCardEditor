@@ -44,7 +44,7 @@
 
 		document.body.appendChild( player.dom );
 
-		ARInit(player, player.renderer, player.scene, player.camera, patt_file_id);
+		ARInit(player, player.renderer, player.scene, player.camera);
 
 		// window.addEventListener( 'resize', function () {
 		// 	player.setSize( window.innerWidth, window.innerHeight );
@@ -55,7 +55,7 @@
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
 	// init renderer
-	var ARInit = function(player, renderer, scene, camera, patt_file_id) {
+	var ARInit = function(player, renderer, scene, camera) {
 		// var renderer	= new THREE.WebGLRenderer({
 		// 	antialias: true,
 		// 	alpha: true

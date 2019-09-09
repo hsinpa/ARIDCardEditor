@@ -308,36 +308,35 @@ Menubar.File = function ( editor ) {
 		delete output.history;
 		// console.log(document.querySelector("#center_modal .content"));
 		var centerModalDom = $("#center_modal");
-
+		var QRCanvas = document.getElementById('qr_canvas');
+		QRCanvas.width  = 1024;
+		QRCanvas.height = 1024;
+		QRCanvas.style.width  = '512px';
+		QRCanvas.style.height = '512px';
+		
+		generateQrCodeImage();
 		output = JSON.stringify( output );
 		var uploadURL = "/gd_data_upload";
 		$.post( uploadURL, output)
 		.done(function( file_id ) {
 			var ar_live_url = ("https://hsinpa.github.io/ARIDCardEditor/index_ar.html?id=" + file_id);
 			console.log(ar_live_url);
+
+			generateArCodeCanvas(QRCanvas, ar_live_url, function() {
+				centerModalDom.css("visibility", "visible");
+			});
+
 			//Clear whats inside
-			$("#center_modal .content").html("");
+			// $("#center_modal .content").html("");
 
 			// var qrcode = new QRCode(document.querySelector("#center_modal .content"), {
 			// 	text: ar_live_url,
 			// 	width: 256,
 			// 	height: 256,
-			// 	colorDark : "#800d22",
+			// 	colorDark : "#000000",
 			// 	colorLight : "#ffffff",
-			// 	correctLevel : QRCode.CorrectLevel.H
+			// 	//correctLevel : QRCode.CorrectLevel.H
 			// });
-
-			QrCodeWithLogo.toCanvas({
-				canvas: document.getElementById('qr_canvas'), // 换成你的canvas节点
-				content: ar_live_url,
-				width: 256,
-				logo: {
-				  src: './images/hiro_patt.jpg',
-				}
-			  })
-			
-
-			centerModalDom.css("visibility", "visible");
 
 			// $("#center_modal .content").find('img').on('load', function() {
 			// 	var patternRatio = 0.8;
@@ -477,6 +476,52 @@ Menubar.File = function ( editor ) {
 		save( new Blob( [ text ], { type: 'text/plain' } ), filename );
 
 	}
+
+//////////////////////////////////////////////////////////////////////////////
+//                Code Separator
+//////////////////////////////////////////////////////////////////////////////
+
+	var hiroImage = new Image;
+	hiroImage.src = './images/hiro_patt.jpg';
+
+	/**
+	 * Generate AR-Code
+	 */
+	function generateArCodeCanvas(canvas, text, onLoad){
+		var context = canvas.getContext('2d')
+		
+		context.drawImage(hiroImage, 0, 0, canvas.width, canvas.height);
+
+		generateQrCodeImage(text, function onLoaded(qrCodeImage){
+				console.log('qrcode generated')
+				context.drawImage(qrCodeImage,canvas.width*0.50,canvas.height*0.30,canvas.width*0.20, canvas.height*0.20);      
+				
+				onLoad && onLoad()          
+		})
+	}
+
+	/**
+	* Generate AR-Code
+	*/
+	function generateQrCodeImage(text, onLoaded){
+		var container = document.createElement('div')
+
+		var qrcode = new QRCode(container, {
+				text: text,
+				width: 256,
+				height: 256,
+				colorDark : '#000000',
+				colorLight : '#ffffff',
+				correctLevel : QRCode.CorrectLevel.H
+		});
+
+		var qrCodeImage = container.querySelector('img')
+		qrCodeImage.addEventListener('load', function(){
+				onLoaded(qrCodeImage)
+		})
+	}
+
+
 
 	return container;
 

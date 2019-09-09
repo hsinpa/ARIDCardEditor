@@ -18,7 +18,7 @@ UIViewUtil.prototype.CreateCenterModal = function() {
 
 UIViewUtil.prototype.GetCenterModalDom = function() {
     return "<div id='center_modal'>"+
-                "<div class='content'>Hello</div>"+
+                "<div class='content'></div>"+
                 "<canvas id='qr_canvas'></canvas>"+
                 "<button>x</button>"+
             "</div>";

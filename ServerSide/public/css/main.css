@@ -169,3 +169,6 @@ textarea, input { outline: none; } /* osx */
 	transform: translate(-50%, -50%);
 	visibility: hidden;  
 }
+
+#qr_canvas {
+}
