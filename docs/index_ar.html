@@ -118,6 +118,7 @@
 		////////////////////////////////////////////////////////////////////////////////
 		// create atToolkitContext
 		var arToolkitContext = new THREEx.ArToolkitContext({
+			debug : true,
 			cameraParametersUrl: './data/data/camera_para.dat',
 			detectionMode: 'mono',
 		})
@@ -131,7 +132,7 @@
 			if( arToolkitSource.ready === false )	return
 			arToolkitContext.update( arToolkitSource.domElement )
 			// update scene.visible if the marker is seen
-			scene.visible = true;
+			scene.visible = camera.visible;
 			//camera.visible
 		})
 
@@ -154,7 +155,7 @@
 			// distance tolerance for smoothing, if smoothThreshold # of matrices are under tolerance, tracking will stay still
 			smoothTolerance: 0.005,
 			// threshold for smoothing, will keep still unless enough matrices are over tolerance
-			smoothThreshold: 2,
+			smoothThreshold: 4,
 		})
 		// as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
 		scene.visible = false;
