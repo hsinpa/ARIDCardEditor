@@ -151,9 +151,9 @@
 			changeMatrixMode: 'cameraTransformMatrix',
 			smooth: true,
 			// number of matrices to smooth tracking over, more = smoother but slower follow
-			smoothCount: 15,
+			smoothCount: 20,
 			// distance tolerance for smoothing, if smoothThreshold # of matrices are under tolerance, tracking will stay still
-			smoothTolerance: 0.005,
+			smoothTolerance: 0.1,
 			// threshold for smoothing, will keep still unless enough matrices are over tolerance
 			smoothThreshold: 4,
 		})
