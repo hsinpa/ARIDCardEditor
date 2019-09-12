@@ -307,7 +307,7 @@ Menubar.File = function ( editor ) {
 		output.metadata.type = 'App';
 		delete output.history;
 		// console.log(document.querySelector("#center_modal .content"));
-		var centerModalDom = $("#center_modal");
+		var centerModalDom = $("#qrcode_modal");
 		var QRCanvas = document.getElementById('qr_canvas');
 		QRCanvas.width  = 1024;
 		QRCanvas.height = 1024;
