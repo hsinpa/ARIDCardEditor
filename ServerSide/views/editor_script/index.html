@@ -215,7 +215,8 @@
 			document.body.appendChild( menubar.dom );
 
 			var uIViewUtil = new UIViewUtil();
-				uIViewUtil.CreateCenterModal();
+				uIViewUtil.CreateCenterModal( uIViewUtil.GetQRCodeModalDom() );
+				uIViewUtil.CreateCenterModal( uIViewUtil.GetInputBoxModalDom() );
 			//
 
 			editor.setTheme( editor.config.getKey( 'theme' ) );
