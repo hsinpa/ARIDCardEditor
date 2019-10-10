@@ -169,6 +169,7 @@
 		var clip = THREE.AnimationClip.findByName( gltf.animations, 'mixamo.com' );
 
 		console.log(clip);
+		console.log(gltf.animations[0]);
 
 		var action = mixer.clipAction( clip );
 		action.play();
