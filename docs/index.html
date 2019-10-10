@@ -89,7 +89,7 @@
 		if( arToolkitSource.ready === false )	return
 		arToolkitContext.update( arToolkitSource.domElement )
 		// update scene.visible if the marker is seen
-		scene.visible = camera.visible
+		//scene.visible = camera.visible
 	})
 	////////////////////////////////////////////////////////////////////////////////
 	//          Create a ArMarkerControls
@@ -110,7 +110,7 @@
 		smoothThreshold: 4,
 	})
 	// as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
-	scene.visible = false
+	scene.visible = true
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add an object in the scene
 	//////////////////////////////////////////////////////////////////////////////////
@@ -165,7 +165,7 @@
 
 		console.log(gltf.animations);
 		var mixer = new THREE.AnimationMixer(gltf.scene);
-		mixer.clipAction(gltf.animations[1]).play();
+		mixer.clipAction(gltf.animations[0]).play();
 
 		// var clip = THREE.AnimationClip.findByName( gltf.animations, 'mixamo.com' );
 		// var action = mixer.clipAction( clip );
