@@ -163,6 +163,7 @@
 
 		scene.add( gltf.scene );
 
+		console.log(gltf.animations);
 		var mixer = new THREE.AnimationMixer(gltf.scene);
 		mixer.clipAction(gltf.animations[0]).play();
 
