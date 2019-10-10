@@ -164,9 +164,11 @@
 		scene.add( gltf.scene );
 
 		var mixer = new THREE.AnimationMixer(gltf.scene);
-		var clip = THREE.AnimationClip.findByName( gltf.animations, 'mixamo.com' );
-		var action = mixer.clipAction( clip );
-		action.play();
+		mixer.clipAction(gltf.animations[0]).play();
+
+		// var clip = THREE.AnimationClip.findByName( gltf.animations, 'mixamo.com' );
+		// var action = mixer.clipAction( clip );
+		// action.play();
 
 	}, undefined, function ( error ) {
 		console.error( error );
