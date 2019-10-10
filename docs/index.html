@@ -165,11 +165,13 @@
 
 		console.log(gltf.animations);
 		var mixer = new THREE.AnimationMixer(gltf.scene);
-		mixer.clipAction(gltf.animations[0]).play();
 
-		// var clip = THREE.AnimationClip.findByName( gltf.animations, 'mixamo.com' );
-		// var action = mixer.clipAction( clip );
-		// action.play();
+		var clip = THREE.AnimationClip.findByName( gltf.animations, 'mixamo.com' );
+
+		console.log(clip);
+
+		var action = mixer.clipAction( clip );
+		action.play();
 
 	}, undefined, function ( error ) {
 		console.error( error );
