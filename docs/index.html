@@ -191,12 +191,14 @@
 		// keep looping
 		requestAnimationFrame( animate );
 
-		if ( mixer ) mixer.update( nowMsec );
 
 		// measure time
 		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
 		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
 		lastTimeMsec	= nowMsec
+
+		if ( mixer ) mixer.update( deltaMsec/1000 );
+deltaMsec/1000
 		// call each update function
 		onRenderFcts.forEach(function(onRenderFct){
 			onRenderFct(deltaMsec/1000, nowMsec/1000)
