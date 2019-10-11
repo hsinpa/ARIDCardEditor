@@ -23,6 +23,8 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
+	var mixer;
+
 	// init renderer
 	var renderer	= new THREE.WebGLRenderer({
 		antialias: true,
@@ -89,7 +91,7 @@
 		if( arToolkitSource.ready === false )	return
 		arToolkitContext.update( arToolkitSource.domElement )
 		// update scene.visible if the marker is seen
-		//scene.visible = camera.visible
+		scene.visible = camera.visible
 	})
 	////////////////////////////////////////////////////////////////////////////////
 	//          Create a ArMarkerControls
@@ -110,7 +112,7 @@
 		smoothThreshold: 4,
 	})
 	// as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
-	scene.visible = true
+	scene.visible = false
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add an object in the scene
 	//////////////////////////////////////////////////////////////////////////////////
@@ -164,12 +166,9 @@
 		scene.add( gltf.scene );
 
 		console.log(gltf.animations);
-		var mixer = new THREE.AnimationMixer(gltf.scene);
+		mixer = new THREE.AnimationMixer(gltf.scene);
 
 		var clip = THREE.AnimationClip.findByName( gltf.animations, 'mixamo.com' );
-
-		console.log(clip);
-		console.log(gltf.animations[0]);
 
 		var action = mixer.clipAction( clip );
 		action.play();
@@ -191,6 +190,9 @@
 	requestAnimationFrame(function animate(nowMsec){
 		// keep looping
 		requestAnimationFrame( animate );
+
+		if ( mixer ) mixer.update( nowMsec );
+
 		// measure time
 		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
 		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
