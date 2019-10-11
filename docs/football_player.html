@@ -115,7 +115,7 @@
 		smoothThreshold: 4,
 	})
 	// as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
-	scene.visible = false
+	scene.visible = false;
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add an object in the scene
 	//////////////////////////////////////////////////////////////////////////////////
@@ -169,12 +169,13 @@
 
 		scene.add( gltf.scene );
 
-		mixer = new THREE.AnimationMixer(gltf.scene);
+		if (gltf.animations.length > 0) {
+			mixer = new THREE.AnimationMixer(gltf.scene);
+			var clip = THREE.AnimationClip.findByName( gltf.animations, 'mixamo.com' );
 
-		var clip = THREE.AnimationClip.findByName( gltf.animations, 'mixamo.com' );
-
-		var action = mixer.clipAction( clip );
-		action.play();
+			var action = mixer.clipAction( clip );
+			action.play();
+		}
 
 	}, undefined, function ( error ) {
 		console.error( error );
