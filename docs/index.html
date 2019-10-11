@@ -198,7 +198,6 @@
 		lastTimeMsec	= nowMsec
 
 		if ( mixer ) mixer.update( deltaMsec/1000 );
-deltaMsec/1000
 		// call each update function
 		onRenderFcts.forEach(function(onRenderFct){
 			onRenderFct(deltaMsec/1000, nowMsec/1000)
