@@ -26,7 +26,7 @@
 	var mixer;
 
 	let url = new URL(window.location.href);
-	console.log(url.searchParams.get("id"));
+	let modelPathID = url.searchParams.get("id");
 
 	// init renderer
 	var renderer	= new THREE.WebGLRenderer({
@@ -162,13 +162,13 @@
 
     var GLTFloader = new THREE.GLTFLoader();
 
-    GLTFloader.load( './models/football_player2/scene.gltf', function ( gltf ) {
+	var gltfPath =  './models/' + modelPathID + '/scene.gltf';
+    GLTFloader.load( gltfPath, function ( gltf ) {
 		gltf.scene.position.set(0,-0.1,0);
 		gltf.scene.scale.set(0.1, 0.1, 0.1);
 
 		scene.add( gltf.scene );
 
-		console.log(gltf.animations);
 		mixer = new THREE.AnimationMixer(gltf.scene);
 
 		var clip = THREE.AnimationClip.findByName( gltf.animations, 'mixamo.com' );
