@@ -25,6 +25,9 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	var mixer;
 
+	let url = new URL(window.location.href);
+	console.log(url.searchParams.get("id"));
+
 	// init renderer
 	var renderer	= new THREE.WebGLRenderer({
 		antialias: true,
@@ -203,5 +206,6 @@
 			onRenderFct(deltaMsec/1000, nowMsec/1000)
 		})
 	})
+
 </script></body>
-</html> 
+</html>
