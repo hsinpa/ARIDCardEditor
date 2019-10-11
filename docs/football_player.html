@@ -94,7 +94,7 @@
 		if( arToolkitSource.ready === false )	return
 		arToolkitContext.update( arToolkitSource.domElement )
 		// update scene.visible if the marker is seen
-		//scene.visible = camera.visible
+		scene.visible = camera.visible
 	})
 	////////////////////////////////////////////////////////////////////////////////
 	//          Create a ArMarkerControls
@@ -115,7 +115,7 @@
 		smoothThreshold: 4,
 	})
 	// as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
-	scene.visible = true;
+	scene.visible = false;
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add an object in the scene
 	//////////////////////////////////////////////////////////////////////////////////
@@ -177,6 +177,7 @@
 			var action = mixer.clipAction( clip );
 			action.play();
 		} else {
+			console.log("Helo");
 			gltf.scene.scale.set(0.001, 0.001, 0.001);
 		}
 
