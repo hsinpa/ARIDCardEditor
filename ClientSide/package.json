@@ -26,7 +26,7 @@
     "@babel/register": "^7.5.5",
     "parcel-bundler": "^1.12.3",
     "parcel-plugin-static-files-copy": "^2.2.1",
-    "three": "^0.107.0"
+    "three": "^0.137.0"
   },
   "dependencies": {
     "babel-loader": "^8.0.6",
